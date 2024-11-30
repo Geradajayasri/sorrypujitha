@@ -1,22 +1,29 @@
+/* General Body Styles */
 body {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
+    margin: 0;
     background: #b784db;
-  }
-  .envelope {
+    overflow: hidden; /* Ensures no scrollbars appear */
+}
+
+/* Envelope Styles */
+.envelope {
     position: relative;
     cursor: pointer;
-  }
-  
-  .back {
+    z-index: 1; /* Keep above moving images */
+}
+
+.back {
     position: relative;
     width: 250px;
     height: 200px;
     background: #6247aa;
-  }
-  .front {
+}
+
+.front {
     position: absolute;
     border-right: 130px solid #815ac0;
     border-top: 100px solid transparent;
@@ -26,8 +33,9 @@ body {
     top: 0;
     left: 120px;
     z-index: 3;
-  }
-  .front:before {
+}
+
+.front:before {
     content: "";
     position: absolute;
     border-left: 130px solid #815ac0;
@@ -37,8 +45,9 @@ body {
     width: 0;
     top: -100px;
     left: -120px;
-  }
-  .front:after {
+}
+
+.front:after {
     content: "";
     position: absolute;
     border-bottom: 105px solid #7251b5;
@@ -48,8 +57,9 @@ body {
     width: 0;
     top: -5px;
     left: -120px;
-  }
-  .top {
+}
+
+.top {
     position: absolute;
     border-top: 105px solid #9163cb;
     border-left: 125px solid transparent;
@@ -59,11 +69,13 @@ body {
     top: 0;
     transform-origin: top;
     transition: 0.4s;
-  }
-  .envelope:hover .top {
+}
+
+.envelope:hover .top {
     transform: rotateX(160deg);
-  }
-  .letter {
+}
+
+.letter {
     position: absolute;
     background: white;
     width: 230px;
@@ -71,18 +83,22 @@ body {
     top: 10px;
     left: 10px;
     transition: 0.2s;
-  }
-  .envelope:hover .letter {
+}
+
+.envelope:hover .letter {
     transform: translateY(-100px);
     z-index: 4;
-  }
-  .text1 {
+}
+
+.text1 {
     position: absolute;
     color: white;
     font-family: sans-serif;
     top: -50%;
-  }
-  .text {
+    text-align: center;
+}
+
+.text {
     text-align: center;
     font-size: 11px;
     font-family: Arial, Helvetica, sans-serif;
@@ -92,10 +108,10 @@ body {
     position: relative;
     top: -20px;
     left: 20px;
-  }
-  
-  /*---heart -----*/
-  .heart {
+}
+
+/* Heart Animation */
+.heart {
     background-color: red;
     height: 70px;
     width: 70px;
@@ -105,20 +121,21 @@ body {
     transform: rotate(-45deg);
     box-shadow: -5px 10px 90px red;
     animation: untoldcoding 0.8s linear infinite;
-  }
-  
-  @keyframes untoldcoding {
+}
+
+@keyframes untoldcoding {
     0% {
-      transform: rotate(-45deg) scale(1.05);
+        transform: rotate(-45deg) scale(1.05);
     }
     70% {
-      transform: rotate(-45deg) scale(1);
+        transform: rotate(-45deg) scale(1);
     }
     100% {
-      transform: rotate(-45deg) scale(0.8);
+        transform: rotate(-45deg) scale(0.8);
     }
-  }
-  .heart:before {
+}
+
+.heart:before {
     content: "";
     position: absolute;
     height: 70px;
@@ -126,8 +143,9 @@ body {
     background-color: red;
     top: -40px;
     border-radius: 50px;
-  }
-  .heart:after {
+}
+
+.heart:after {
     content: "";
     position: absolute;
     height: 70px;
@@ -135,4 +153,60 @@ body {
     background-color: red;
     right: -40px;
     border-radius: 50px;
-  }
+}
+
+/* Moving Images Container */
+.moving-images {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; /* Full screen width */
+    height: 100vh; /* Full screen height */
+    overflow: hidden;
+    z-index: 0; /* Place behind the envelope */
+}
+
+.moving-images img {
+    position: absolute;
+    width: 150px; /* Adjust image size */
+    animation: move-around 20s infinite linear; /* Smooth animation loop */
+}
+
+/* Keyframes for Random Movement */
+@keyframes move-around {
+    0% {
+        transform: translate(0, 0);
+    }
+    25% {
+        transform: translate(100vw, 50vh);
+    }
+    50% {
+        transform: translate(-50vw, -100vh);
+    }
+    75% {
+        transform: translate(-100vw, 50vh);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+/* Different Animation for Each Image */
+.moving-images img:nth-child(1) {
+    animation: move-around 25s infinite linear;
+}
+
+.moving-images img:nth-child(2) {
+    animation: move-around 30s infinite linear;
+    animation-delay: 5s;
+}
+
+.moving-images img:nth-child(3) {
+    animation: move-around 20s infinite linear;
+    animation-delay: 10s;
+}
+
+.moving-images img:nth-child(4) {
+    animation: move-around 35s infinite linear;
+    animation-delay: 15s;
+}
